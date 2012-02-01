@@ -1,0 +1,99 @@
+<!--
+  Maven build file for Mail
+  Copyright (c) 2012 Dan Stealthii Reid <http://stealthii.net>
+  Mail is available under the zlib/libpng License
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.imdeity</groupId>
+  <artifactId>Mail</artifactId>
+  <version>1.2-SNAPSHOT</version>
+  <name>Mail</name>
+  <description>Mail plugin for CraftBukkit.</description>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <scm>
+    <connection>scm:git:git://github.com/Stealthii/Mail.git</connection>
+    <url>https://github.com/Stealthii/Mail</url>
+    <developerConnection>scm:git:git@github.com:Stealthii/Mail.git</developerConnection>
+  </scm>
+
+  <repositories>
+    <repository>
+      <id>sk89q-mvn2</id>
+      <url>http://mvn2.sk89q.com/repo</url>
+    </repository>
+    <repository>
+      <id>bukkit-repo</id>
+      <url>http://repo.bukkit.org/content/groups/public</url>
+    </repository>
+    <repository>
+      <id>spout-repo</id>
+      <url>http://repo.getspout.org</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <!-- Bukkit -->
+    <dependency>
+      <groupId>org.bukkit</groupId>
+      <artifactId>bukkit</artifactId>
+      <version>1.1-R3</version>
+    </dependency>
+
+    <!-- MySQL Connector -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.18</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>${basedir}/src/main/java/</sourceDirectory>
+
+    <!-- Resources -->
+    <resources>
+      <resource>
+        <targetPath>.</targetPath>
+        <filtering>true</filtering>
+        <directory>${basedir}/src/main/resources/</directory>
+        <includes>
+          <include>plugin.yml</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <!-- Plugins -->
+    <plugins>
+      <!-- Compile plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default-testCompile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>default-compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
