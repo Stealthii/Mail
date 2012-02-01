@@ -2,13 +2,13 @@ package com.imdeity.mail.object;
 
 //~--- non-JDK imports --------------------------------------------------------
 
-import com.imdeity.mail.util.HumanTime;
 import com.imdeity.mail.util.StringMgmt;
 
 //~--- JDK imports ------------------------------------------------------------
 
 import java.util.Calendar;
 import java.util.Date;
+import java.text.DateFormat;
 
 public class MailObject {
     private int    id,
@@ -63,15 +63,8 @@ public class MailObject {
     }
 
     public String getSendDate() {
-        return ((this.sendDate != null)
-                ? this.timeApproxToDate(sendDate)
-                : "Not Available");
-    }
-
-    public String timeApproxToDate(Date date) {
-        long relativeTime = date.getTime() - Calendar.getInstance().getTimeInMillis();
-
-        return HumanTime.approximately(relativeTime) + " ago";
+        DateFormat df = DateFormat.getDateInstance();
+        return df.format(this.sendDate);
     }
 
     public String[] preformReplacement(String msg) {
