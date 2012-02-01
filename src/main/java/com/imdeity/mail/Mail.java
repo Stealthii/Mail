@@ -7,7 +7,6 @@ import com.imdeity.mail.event.MailPlayerListener;
 import com.imdeity.mail.object.Language;
 import com.imdeity.mail.sql.MailSQL;
 import com.imdeity.mail.sql.MySQLConnection;
-import com.imdeity.mail.util.ChatTools;
 
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -90,7 +89,7 @@ public class Mail extends JavaPlugin {
     }
 
     public void sendPlayerMessage(Player player, String message) {
-        ChatTools.formatAndSend(Language.getHeader() + message, player);
+        player.sendMessage(Language.getHeader() + message);
     }
 
     public void out(String message) {

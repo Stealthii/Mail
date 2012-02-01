@@ -5,7 +5,6 @@ package com.imdeity.mail.cmd;
 import com.imdeity.mail.Mail;
 import com.imdeity.mail.object.Language;
 import com.imdeity.mail.sql.MailSQL;
-import com.imdeity.mail.util.ChatTools;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -49,7 +48,7 @@ public class MailCommand implements CommandExecutor {
         output.add(this.formatCommands("/mail info", "Plugin Information"));
 
         for (String msg : output) {
-            ChatTools.formatAndSend(msg, player);
+            player.sendMessage(msg);
         }
     }
 
@@ -109,7 +108,7 @@ public class MailCommand implements CommandExecutor {
             out.add("&3#&0-&b###&0-");
 
             for (String s : out) {
-                ChatTools.formatAndSend(s, player);
+                player.sendMessage(s);
             }
         } else if (split.length == 1) {
             checkMail(player, split[0]);
