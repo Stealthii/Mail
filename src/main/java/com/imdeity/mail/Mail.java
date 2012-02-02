@@ -19,12 +19,12 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 
 public class Mail extends JavaPlugin {
-    public static MySQLConnection database = null;
-    public static Mail            mail     = null;
-    public static boolean         hasError = false;
-    public Language               language = null;
-    public final Logger           log      = Logger.getLogger("Minecraft");
-    private Settings              settings = null;
+    public static MySQLConnection database    = null;
+    public static Mail            mail        = null;
+    public static boolean         configError = false;
+    public Language               language    = null;
+    public final Logger           log         = Logger.getLogger("Minecraft");
+    private Settings              settings    = null;
 
     @Override
     public void onDisable() {
@@ -34,35 +34,27 @@ public class Mail extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        this.reloadConfigs();
-        Mail.mail = this;
-        getCommand("mail").setExecutor(new MailCommand(this));
-
-        try {
-            setupDatabase();
-        } catch (Exception ex) {
-            out("Database is set up incorrectly. Please configure the config.yml before procedeing");
-            hasError = true;
-        }
-
-        if (!hasError) {
-            getServer().getPluginManager().registerEvents(new MailPlayerListener(this), this);
-        }
-
-        out("Enabled");
-    }
-
-    public void reloadConfigs() {
         this.language = null;
         this.settings = null;
         this.language = new Language();
         this.language.loadDefaults();
         this.settings = new Settings(this);
         this.settings.loadSettings("config.yml", "/config.yml");
-    }
+        Mail.mail = this;
+        getCommand("mail").setExecutor(new MailCommand(this));
 
-    public void setupDatabase() throws Exception {
-        database = new MySQLConnection();
+        try {
+            database = new MySQLConnection();
+        } catch (Exception ex) {
+            out("Database is set up incorrectly. Please configure the config.yml before procedeing");
+            configError = true;
+        }
+
+        if (!configError) {
+            getServer().getPluginManager().registerEvents(new MailPlayerListener(this), this);
+        }
+
+        out("Enabled");
     }
 
     public Player getPlayer(String playername) {

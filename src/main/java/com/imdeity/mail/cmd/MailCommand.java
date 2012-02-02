@@ -61,7 +61,7 @@ public class MailCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String args[]) {
-        if (Mail.hasError) {
+        if (Mail.configError) {
             sender.sendMessage("[Mail] Config is not set up correctly. Commands will not work until this is fixed");
 
             return false;
